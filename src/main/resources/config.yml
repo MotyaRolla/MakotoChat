@@ -1,0 +1,19 @@
+chat:
+  useCustomName: true
+  hasGlobalChat: true
+  mentions:
+    enabled: true
+    prefix: "" #can be "@", ex.: Hi, @MotyaRolla
+    alarm:
+      enabled: false
+      message: "&c<0> &7tagged you!" #<1> - who was tagged; <0> - who tagged;
+  automod:
+    enabled: false
+    blur: #blur words
+      enabled: true
+      good_words: ["kitty","cat","frog"]
+      format: "&o<0>&r" #<0> - word from list above. Ex. "he looks like (badword)!" -> "he looks like &o(goodword)&r!"
+      alarm:
+        enabled: true
+        message: "&cAH! &7<0> replaced to <1>!" #<0> - bad word; <1> - new word;
+badwords: ["fuck", "cunt", "nigger", "nigga", "simp"]

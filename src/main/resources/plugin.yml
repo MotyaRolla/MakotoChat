@@ -1,0 +1,7 @@
+name: MakotoChat
+version: '${project.version}'
+main: ru.makotomc.makotochat.MakotoChat
+api-version: 1.15
+authors: [ MotyaRolla, Makotomc ]
+description: Provides modern automod features for your server!
+website: makoto.ru
