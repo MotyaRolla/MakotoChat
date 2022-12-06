@@ -1,20 +1,19 @@
-package ru.makotomc.makotochat;
+package ru.makotomc.makotochat.handlers;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import ru.makotomc.makotochat.Config.Option;
+import ru.makotomc.makotochat.Utils;
 
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import static ru.makotomc.makotochat.Config.config;
+import static ru.makotomc.makotochat.Config.Config.config;
 
 public class ChatHandler implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -30,19 +29,22 @@ public class ChatHandler implements Listener {
 
         if( config.getBool(Option.mentions)){
             String prefix = config.getString(Option.mentions_prefix);
+            String chat_format = config.getString(Option.mention_format);
+
             boolean hasGlobal = config.getBool(Option.global_chat);
 
             boolean alarm = config.getBool(Option.alarm);
-            String format = config.getString(Option.alarm_message);
+            String alarm_format = config.getString(Option.alarm_message);
+
 
             for(Player p : Bukkit.getOnlinePlayers()) {
                 for(String word : message.split("\\s+")) {
                     if (word.equals(prefix+p.getName())) {
-                        message = message.replace(p.getName(), p.getCustomName() + ChatColor.WHITE);
+                        message = message.replace(word, Utils.formatMessage(chat_format.replace("<0>",Utils.getNickname(p))));
                         if (alarm&&(hasGlobal==isGlobal)) {
                             p.sendMessage(
                                     Utils.formatMessage(
-                                            format
+                                            alarm_format
                                                     .replace("<0>",Utils.getNickname(e.getPlayer()))
                                                     .replace("<1>", Utils.getNickname(p))
                                     )
@@ -77,6 +79,9 @@ public class ChatHandler implements Listener {
                 }
             }
         }
+
+        if(isGlobal)
+            message = "!"+message;
         e.setMessage(message);
     }
 }

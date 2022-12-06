@@ -1,11 +1,28 @@
+locale:
+  no_permission: "&cYou should have permission!"
+  wrong_usage: "&7Wrong usage, type &c/<0> help" # <0> used command
+  commands:
+    makoto:
+      help: |
+        &c<0> help &7- show this message
+        &c<0> reload &7- reload config
+        &c<0> badwords add/remove <word> &7- allows you to edit badwords from config
+      reload: "&7Makotochat config reloaded"
+      badwords:
+        add: "&c<0> &7added"
+        remove: "&c<0> &7removed"
+
+
+
 chat:
   useCustomName: true
   hasGlobalChat: true
   mentions:
     enabled: true
     prefix: "" #can be "@", ex.: Hi, @MotyaRolla
+    format: "&6@<0>&r" # if prefix equals "" Hi, &6@MotyaRolla&r
     alarm:
-      enabled: false
+      enabled: true
       message: "&c<0> &7tagged you!" #<1> - who was tagged; <0> - who tagged;
   automod:
     enabled: false
@@ -16,4 +33,4 @@ chat:
       alarm:
         enabled: true
         message: "&cAH! &7<0> replaced to <1>!" #<0> - bad word; <1> - new word;
-badwords: ["fuck", "cunt", "nigger", "nigga", "simp"]
+badwords: ["fuck", "cunt", "shit"]

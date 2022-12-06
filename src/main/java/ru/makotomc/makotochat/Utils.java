@@ -1,8 +1,9 @@
 package ru.makotomc.makotochat;
 
 import org.bukkit.entity.Player;
+import ru.makotomc.makotochat.Config.Option;
 
-import static ru.makotomc.makotochat.Config.config;
+import static ru.makotomc.makotochat.Config.Config.config;
 
 public class Utils {
 
