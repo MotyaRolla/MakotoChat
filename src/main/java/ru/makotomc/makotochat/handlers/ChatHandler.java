@@ -1,5 +1,6 @@
 package ru.makotomc.makotochat.handlers;
 
+import com.google.common.base.Joiner;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,14 +9,44 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import ru.makotomc.makotochat.Config.Option;
 import ru.makotomc.makotochat.Utils;
+import ru.makotomc.makotochat.WebHook;
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
+import java.util.regex.Pattern;
 
 import static ru.makotomc.makotochat.Config.Config.config;
 
 public class ChatHandler implements Listener {
+    public static final Map<String,String> playerMessages = new HashMap<>();
+
+    public static void checkMsgs(){
+        for(Map.Entry<String, String> set : playerMessages.entrySet()){
+            String player = set.getKey();
+            String msg = set.getValue();
+            String notFormatted = msg;
+
+            msg = msg.replaceAll("(.)\\1+", "$1");
+            msg = msg.replaceAll("[\\[\\]!@`#&%^*()_+=.>,</0-9 ]","").toLowerCase();
+
+            boolean edited = false;
+            List<String> founded = new ArrayList<>();
+            for(String badword : config.getList(Option.badwords)){
+                badword = badword.replaceAll("(.)\\1+", "$1").toLowerCase();
+                if(Pattern.compile(badword).matcher(msg).find()){
+                    notFormatted = notFormatted.replace(badword,"`"+badword+"`");
+                    founded.add(badword);
+                    edited = true;
+                }
+            }
+            if(edited)
+                WebHook.sendAlarm(
+                        player,
+                        notFormatted.replace("``",""),
+                        Joiner.on(' ').join(founded)
+                );
+            playerMessages.remove(player);
+        }
+    }
     @EventHandler(priority = EventPriority.MONITOR)
     public void onChat(AsyncPlayerChatEvent e){
         Player author = e.getPlayer();
@@ -45,7 +76,7 @@ public class ChatHandler implements Listener {
                             p.sendMessage(
                                     Utils.formatMessage(
                                             alarm_format
-                                                    .replace("<0>",Utils.getNickname(e.getPlayer()))
+                                                    .replace("<0>",Utils.getNickname(author))
                                                     .replace("<1>", Utils.getNickname(p))
                                     )
                             );
@@ -71,14 +102,18 @@ public class ChatHandler implements Listener {
 
                         message = message.replace(word, Utils.formatMessage(format.replace("<0>",randomWord)));
                         if(alarm){
-                            e.getPlayer().sendMessage(
+                            author.sendMessage(
                                     Utils.formatMessage(alarmMsg.replace("<0>",word).replace("<1>",randomWord))
                             );
                         }
                     }
                 }
             }
+            if(config.getBool(Option.discord_alarm)){
+                playerMessages.put(Utils.getNickname(author),message);
+            }
         }
+
 
         if(isGlobal)
             message = "!"+message;

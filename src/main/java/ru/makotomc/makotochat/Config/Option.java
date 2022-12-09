@@ -22,6 +22,11 @@ public enum Option{
     locale_makotoreload("locale.commands.makoto.reload", "String"),
     locale_badwordadd("locale.commands.makoto.badwords.add", "String"),
     locale_badwordremove("locale.commands.makoto.badwords.remove", "String"),
+    discord_alarm("chat.automod.discord_alarms.enabled","boolean"),
+    discord_webhook("chat.automod.discord_alarms.webhook","String"),
+    embed_title("chat.automod.discord_alarms.embed.title", "String"),
+    embed_desc("chat.automod.discord_alarms.embed.description", "String"),
+    embed_footer("chat.automod.discord_alarms.embed.footer", "String"),
     blur_format("chat.automod.blur.format", "String");
     public final String path;
     public final String type;

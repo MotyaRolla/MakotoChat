@@ -17,6 +17,7 @@ locale:
 chat:
   useCustomName: true
   hasGlobalChat: true
+
   mentions:
     enabled: true
     prefix: "" #can be "@", ex.: Hi, @MotyaRolla
@@ -26,11 +27,20 @@ chat:
       message: "&c<0> &7tagged you!" #<1> - who was tagged; <0> - who tagged;
   automod:
     enabled: false
-    blur: #blur words
+    blur: #blur word if the word is in a badwords
       enabled: true
       good_words: ["kitty","cat","frog"]
       format: "&o<0>&r" #<0> - word from list above. Ex. "he looks like (badword)!" -> "he looks like &o(goodword)&r!"
       alarm:
         enabled: true
         message: "&cAH! &7<0> replaced to <1>!" #<0> - bad word; <1> - new word;
-badwords: ["fuck", "cunt", "shit"]
+    discord_alarms:
+      #need to create webhook on log channel (only for mods)
+      #if chat message only contains badword
+      enabled: false
+      webhook: "webhook"
+      embed:
+        title: "Warning!"
+        description: "<0>: <1>" # <0> - player nickname, <1> - full message with bold badword
+        footer: "found: <0>" #<0> - bad word
+badwords: ["bad", "word"]

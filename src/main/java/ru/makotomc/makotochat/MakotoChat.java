@@ -9,15 +9,20 @@ import ru.makotomc.makotochat.handlers.ChatHandler;
 import java.util.Objects;
 
 public final class MakotoChat extends JavaPlugin {
-//    public static Map<String, Boolean> config = new HashMap<>();
-
     @Override
     public void onEnable() {
+        //config
         saveDefaultConfig();
         Config.init();
+        WebHook.init();
 
+        //events
         Bukkit.getPluginManager().registerEvents(new ChatHandler(),this);
+
+        //commands
         Objects.requireNonNull(Bukkit.getPluginCommand("makotochat")).setExecutor(new PluginCommand());
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this,ChatHandler::checkMsgs,100,100);
 
     }
 
