@@ -15,6 +15,10 @@ public enum Option{
     global_chat("chat.hasGlobalChat", "boolean"),
     badwords("badwords","List"),
     mention_format("chat.mentions.format","String"),
+    player_join("chat.system_msg.player_join.enabled", "boolean"),
+    player_exit("chat.system_msg.player_exit.enabled", "boolean"),
+    join_messages("chat.system_msg.player_join.messages", "List"),
+    exit_messages("chat.system_msg.player_exit.messages","List"),
 
     locale_noperm("locale.no_permission","String"),
     locale_wrongusage("locale.wrong_usage", "String"),

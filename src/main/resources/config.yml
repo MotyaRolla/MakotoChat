@@ -17,6 +17,19 @@ locale:
 chat:
   useCustomName: true
   hasGlobalChat: true
+  system_msg:
+      player_join:
+        enabled: false
+        messages: #can be used many messages
+          - " &l&7+ &r&7<0>"
+          #- "&l&7-> &r&7Player <0> joined the server!"
+          #- "&7Hello, <0>!"
+      player_exit:
+        enabled: false
+        messages:
+          - " &l&7- &r&7<0>"
+          #- "&l&7<- &r&7Player <0> left the server!"
+          #- "&7Bye, <0>!"
 
   mentions:
     enabled: true

@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.makotomc.makotochat.Config.Config;
 import ru.makotomc.makotochat.commands.PluginCommand;
 import ru.makotomc.makotochat.handlers.ChatHandler;
+import ru.makotomc.makotochat.handlers.JoinExitHandler;
 
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public final class MakotoChat extends JavaPlugin {
 
         //events
         Bukkit.getPluginManager().registerEvents(new ChatHandler(),this);
+        Bukkit.getPluginManager().registerEvents(new JoinExitHandler(), this);
 
         //commands
         Objects.requireNonNull(Bukkit.getPluginCommand("makotochat")).setExecutor(new PluginCommand());

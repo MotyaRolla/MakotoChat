@@ -2,6 +2,7 @@ package ru.makotomc.makotochat.Config;
 
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import ru.makotomc.makotochat.MakotoChat;
 
 import java.io.File;
@@ -21,18 +22,6 @@ public class Config {
     @Getter
     private final Map<String, List<String>> listConf = new HashMap<>();
 
-    //    public Object getOption(Option option){
-//        if(booleanConf.containsKey(option.name()))
-//            return booleanConf.get(option.name());
-//
-//        if(stringConf.containsKey(option.name()))
-//            return stringConf.get(option.name());
-//
-//        if(listConf.containsKey(option.name()))
-//            return listConf.get(option.name());
-//
-//        return null;
-//    }
     public String getString(Option option) {
         return stringConf.get(option.name());
     }
@@ -74,7 +63,8 @@ public class Config {
     }
 
     public void loadOptions() {
-        FileConfiguration config = MakotoChat.getInstance().getConfig();
+        File configFile = new File(MakotoChat.getInstance().getDataFolder(), "config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         stringConf.clear();
         booleanConf.clear();
         listConf.clear();
