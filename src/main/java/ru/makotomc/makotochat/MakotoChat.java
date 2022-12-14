@@ -12,6 +12,7 @@ import java.util.Objects;
 public final class MakotoChat extends JavaPlugin {
     @Override
     public void onEnable() {
+        getLogger().info("MakotoChat is on!");
         //config
         saveDefaultConfig();
         Config.init();
@@ -25,12 +26,11 @@ public final class MakotoChat extends JavaPlugin {
         Objects.requireNonNull(Bukkit.getPluginCommand("makotochat")).setExecutor(new PluginCommand());
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this,ChatHandler::checkMsgs,100,100);
-
     }
 
     @Override
     public void onDisable() {
-
+        getLogger().info("MakotoChat is disabled!");
     }
 
 

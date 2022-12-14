@@ -12,8 +12,6 @@ locale:
         add: "&c<0> &7added"
         remove: "&c<0> &7removed"
 
-
-
 chat:
   useCustomName: true
   hasGlobalChat: true
@@ -30,7 +28,6 @@ chat:
           - " &l&7- &r&7<0>"
           #- "&l&7<- &r&7Player <0> left the server!"
           #- "&7Bye, <0>!"
-
   mentions:
     enabled: true
     prefix: "" #can be "@", ex.: Hi, @MotyaRolla
