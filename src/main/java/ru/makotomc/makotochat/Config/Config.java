@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class Config {
     public static Config config;
+    private static FileConfiguration fileConfiguration;
     @Getter
     private final Map<String, Boolean> booleanConf = new HashMap<>();
     @Getter
@@ -61,19 +62,23 @@ public class Config {
         config = new Config();
         config.loadOptions();
     }
+    public static String configString(String path){
+        return fileConfiguration.getString(path);
+    }
 
     public void loadOptions() {
         File configFile = new File(MakotoChat.getInstance().getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+        fileConfiguration = YamlConfiguration.loadConfiguration(configFile);
+
         stringConf.clear();
         booleanConf.clear();
         listConf.clear();
         try {
             for (Option option : Option.values()) {
                 switch (option.type) {
-                    case "String" -> stringConf.put(option.name(), config.getString(option.path));
-                    case "boolean" -> booleanConf.put(option.name(), config.getBoolean(option.path));
-                    case "List" -> listConf.put(option.name(), config.getStringList(option.path));
+                    case "String" -> stringConf.put(option.name(), fileConfiguration.getString(option.path));
+                    case "boolean" -> booleanConf.put(option.name(), fileConfiguration.getBoolean(option.path));
+                    case "List" -> listConf.put(option.name(), fileConfiguration.getStringList(option.path));
                 }
             }
         } catch (Exception e) {

@@ -16,6 +16,40 @@ chat:
   useCustomName: true
   hasGlobalChat: true
   system_msg:
+      death:
+        enabled: false
+        causes:
+          contact: "<0> was pricked to death"
+          entity_attack: "<0> was slain by <1>"
+          entity_sweep_attack: "<0> was killed by <1>  "
+          projectile: "<0> was shot by <1>"
+          suffocation: "<0> suffocated in a wall"
+          fall: "<0> hit the ground too hard"
+          fire: "<0> went up in flames"
+          fire_tick: "<0> burned to death"
+          melting: "<0> was melted"
+          lava: "<0> tried to swim in lava"
+          drowning: "<0> drowned"
+          block_explosion: "<0> blew up"
+          entity_explosion: "<0> went off with a bang"
+          void: "<0> fell out of the world"
+          lightning: "<0> was struck by lightning"
+          suicide: "<0> suicided"
+          starvation: "<0> starved to death"
+          poison: "<0> was poisoned"
+          magic: "<0> was killed by magic"
+          wither: "<0> withered away"
+          falling_block: "<0> was squashed"
+          thorns: "<0> was killed trying to hurt <1>"
+          dragon_breath: "<0> was killed by Ender Dragon using magic"
+          custom: "<0> died"
+          fly_into_wall: "<0> experienced kinetic energy"
+          hot_floor: "<0> discovered the floor was lava"
+          cramming: "<0> was squished too much"
+          dryout: "<0> withered away"
+          freeze: "<0> froze to death"
+          sonic_boom: "<0> was slain by Warden!"
+
       player_join:
         enabled: false
         messages: #can be used many messages

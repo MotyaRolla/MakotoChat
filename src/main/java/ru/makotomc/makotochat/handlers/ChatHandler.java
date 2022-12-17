@@ -47,6 +47,7 @@ public class ChatHandler implements Listener {
             playerMessages.remove(player);
         }
     }
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onChat(AsyncPlayerChatEvent e){
         Player author = e.getPlayer();
