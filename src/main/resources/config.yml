@@ -68,6 +68,7 @@ chat:
     format: "&6@<0>&r" # if prefix equals "" Hi, &6@MotyaRolla&r
     alarm:
       enabled: true
+      sound: "ENTITY_PLAYER_LEVELUP"
       message: "&c<0> &7tagged you!" #<1> - who was tagged; <0> - who tagged;
   automod:
     enabled: false
@@ -77,6 +78,7 @@ chat:
       format: "&o<0>&r" #<0> - word from list above. Ex. "he looks like (badword)!" -> "he looks like &o(goodword)&r!"
       alarm:
         enabled: true
+        sound: "BLOCK_ANVIL_FALL"
         message: "&cAH! &7<0> replaced to <1>!" #<0> - bad word; <1> - new word;
     discord_alarms:
       #need to create webhook on log channel (only for mods)

@@ -2,6 +2,7 @@ package ru.makotomc.makotochat.handlers;
 
 import com.google.common.base.Joiner;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -52,7 +53,6 @@ public class ChatHandler implements Listener {
     public void onChat(AsyncPlayerChatEvent e){
         Player author = e.getPlayer();
         String message = e.getMessage();
-
         boolean isGlobal = false;
         if(message.charAt(0)=='!') {
             isGlobal = true;
@@ -74,6 +74,7 @@ public class ChatHandler implements Listener {
                     if (word.equals(prefix+p.getName())) {
                         message = message.replace(word, Utils.formatMessage(chat_format.replace("<0>",Utils.getNickname(p))));
                         if (alarm&&(hasGlobal==isGlobal)) {
+                            p.playSound(p.getLocation(), Sound.valueOf(config.getString(Option.mention_alarm_sound)),1,1);
                             p.sendMessage(
                                     Utils.formatMessage(
                                             alarm_format
@@ -89,7 +90,6 @@ public class ChatHandler implements Listener {
 
         if(config.getBool(Option.automod)){
             if(config.getBool(Option.blur)){
-
                 List<String> badwords = config.getList(Option.badwords);
                 List<String> goodwords = config.getList(Option.good_words);
                 boolean alarm = config.getBool(Option.automod_alarm);
@@ -103,6 +103,7 @@ public class ChatHandler implements Listener {
 
                         message = message.replace(word, Utils.formatMessage(format.replace("<0>",randomWord)));
                         if(alarm){
+                            author.playSound(author.getLocation(), Sound.valueOf(config.getString(Option.blur_alarm_sound)),1,1);
                             author.sendMessage(
                                     Utils.formatMessage(alarmMsg.replace("<0>",word).replace("<1>",randomWord))
                             );

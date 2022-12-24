@@ -3,6 +3,8 @@ package ru.makotomc.makotochat.Config;
 
 public enum Option{
     mentions("chat.mentions.enabled","boolean"),
+    mention_alarm_sound("chat.mentions.alarm.sound", "String"),
+    blur_alarm_sound("chat.automod.blur.alarm.sound", "String"),
     customNames("chat.useCustomName","boolean"),
     mentions_prefix("chat.mentions.prefix", "String"),
     alarm("chat.mentions.alarm.enabled", "boolean"),
