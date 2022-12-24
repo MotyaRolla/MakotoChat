@@ -33,4 +33,5 @@ We don't have any donations, sponsorship subscriptions, we just ask you to star 
 
 ## Wiki
  https://makoto-1.gitbook.io/makotochat/
+
 *created by makotomc.ru with love <3*
