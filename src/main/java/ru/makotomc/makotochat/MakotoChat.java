@@ -27,7 +27,7 @@ public final class MakotoChat extends JavaPlugin {
         //commands
         Objects.requireNonNull(Bukkit.getPluginCommand("makotochat")).setExecutor(new PluginCommand());
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this,ChatHandler::checkMsgs,100,100);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this,ChatHandler::checkMsgs,1000,1000);
     }
 
     @Override

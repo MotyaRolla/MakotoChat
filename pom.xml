@@ -6,7 +6,7 @@
 
     <groupId>ru.makotomc</groupId>
     <artifactId>MakotoChat</artifactId>
-    <version>1.0</version>
+    <version>1.02</version>
     <packaging>jar</packaging>
 
     <name>MakotoChat</name>

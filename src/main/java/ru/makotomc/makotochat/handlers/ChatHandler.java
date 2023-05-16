@@ -21,32 +21,36 @@ public class ChatHandler implements Listener {
     public static final Map<String,String> playerMessages = new HashMap<>();
 
     public static void checkMsgs(){
-        for(Map.Entry<String, String> set : playerMessages.entrySet()){
-            String player = set.getKey();
-            String msg = set.getValue();
-            String notFormatted = msg;
+        try {
+            if (playerMessages.isEmpty())
+                return;
+            for (Map.Entry<String, String> set : playerMessages.entrySet()) {
+                String player = set.getKey();
+                String msg = set.getValue();
+                String notFormatted = msg;
 
-            msg = msg.replaceAll("(.)\\1+", "$1");
-            msg = msg.replaceAll("[\\[\\]!@`#&%^*()_+=.>,</0-9 ]","").toLowerCase();
+                msg = msg.replaceAll("(.)\\1+", "$1");
+                msg = msg.replaceAll("[\\[\\]!@`#&%^*()_+=.>,</0-9 ]", "").toLowerCase();
 
-            boolean edited = false;
-            List<String> founded = new ArrayList<>();
-            for(String badword : config.getList(Option.badwords)){
-                badword = badword.replaceAll("(.)\\1+", "$1").toLowerCase();
-                if(Pattern.compile(badword).matcher(msg).find()){
-                    notFormatted = notFormatted.replace(badword,"`"+badword+"`");
-                    founded.add(badword);
-                    edited = true;
+                boolean edited = false;
+                List<String> founded = new ArrayList<>();
+                for (String badword : config.getList(Option.badwords)) {
+                    badword = badword.replaceAll("(.)\\1+", "$1").toLowerCase();
+                    if (Pattern.compile(badword).matcher(msg).find()) {
+                        notFormatted = notFormatted.replace(badword, "`" + badword + "`");
+                        founded.add(badword);
+                        edited = true;
+                    }
                 }
+                if (edited)
+                    WebHook.sendAlarm(
+                            player,
+                            notFormatted.replace("``", ""),
+                            Joiner.on(' ').join(founded)
+                    );
+                playerMessages.remove(player);
             }
-            if(edited)
-                WebHook.sendAlarm(
-                        player,
-                        notFormatted.replace("``",""),
-                        Joiner.on(' ').join(founded)
-                );
-            playerMessages.remove(player);
-        }
+        }catch (Exception ignored){}
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
