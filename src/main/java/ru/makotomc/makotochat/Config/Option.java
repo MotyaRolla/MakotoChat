@@ -27,14 +27,21 @@ public enum Option{
     locale_makotohelp("locale.commands.makoto.help", "String"),
     locale_makotoreload("locale.commands.makoto.reload", "String"),
     locale_badwordadd("locale.commands.makoto.badwords.add", "String"),
-    locale_badwordremove("locale.commands.makoto.badwords.remove", "String"),
+    locale_badwordremove("locale.commands.pm.badwords.remove", "String"),
+    locale_noreply("locale.commands.pm.noreply", "String"),
+    locale_messagesent("locale.commands.pm.messagesent", "String"),
+    locale_newmessage("locale.commands.pm.newmessage", "String"),
+    locale_wrongusage_pm("locale.commands.pm.wrong_usage_pm", "String"),
+    locale_newmessage_title("locale.commands.pm.messagesent_title", "String"),
+    locale_player_not_found("locale.commands.pm.player_not_found", "String"),
     discord_alarm("chat.automod.discord_alarms.enabled","boolean"),
     discord_webhook("chat.automod.discord_alarms.webhook","String"),
     embed_title("chat.automod.discord_alarms.embed.title", "String"),
     embed_desc("chat.automod.discord_alarms.embed.description", "String"),
     embed_footer("chat.automod.discord_alarms.embed.footer", "String"),
     death_messages("chat.system_msg.death.enabled","boolean"),
-    blur_format("chat.automod.blur.format", "String");
+    blur_format("chat.automod.blur.format", "String"),
+    use_makoto_private_messages("chat.use_makoto_private_messages", "boolean");
     public final String path;
     public final String type;
     Option(String path, String type){

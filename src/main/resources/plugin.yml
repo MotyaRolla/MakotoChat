@@ -11,3 +11,6 @@ permissions:
 commands:
   makotochat:
     description: Main plugin command
+  makotomsg:
+    description: Command for sending private messages
+    aliases: ["reply", "r","re","m","msg","ms","pm","w"]

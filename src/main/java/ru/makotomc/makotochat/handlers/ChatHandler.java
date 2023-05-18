@@ -12,21 +12,32 @@ import ru.makotomc.makotochat.Config.Option;
 import ru.makotomc.makotochat.Utils;
 import ru.makotomc.makotochat.WebHook;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 import static ru.makotomc.makotochat.Config.Config.config;
 
+class MessageContainer{
+    String nickname;
+    String msg;
+    public MessageContainer(String nickname, String msg){
+        this.nickname = nickname;
+        this.msg = msg;
+    }
+}
 public class ChatHandler implements Listener {
-    public static final Map<String,String> playerMessages = new HashMap<>();
+    public static final List<MessageContainer> playerMessages = new ArrayList<>();
 
     public static void checkMsgs(){
         try {
             if (playerMessages.isEmpty())
                 return;
-            for (Map.Entry<String, String> set : playerMessages.entrySet()) {
-                String player = set.getKey();
-                String msg = set.getValue();
+            for (MessageContainer set : playerMessages) {
+                String player = set.nickname;
+                String msg = set.msg;
                 String notFormatted = msg;
 
                 msg = msg.replaceAll("(.)\\1+", "$1");
@@ -48,7 +59,7 @@ public class ChatHandler implements Listener {
                             notFormatted.replace("``", ""),
                             Joiner.on(' ').join(founded)
                     );
-                playerMessages.remove(player);
+                playerMessages.remove(set);
             }
         }catch (Exception ignored){}
     }
@@ -115,11 +126,9 @@ public class ChatHandler implements Listener {
                     }
                 }
             }
-            if(config.getBool(Option.discord_alarm)){
-                playerMessages.put(Utils.getNickname(author),message);
-            }
+            if(config.getBool(Option.discord_alarm))
+                playerMessages.add(new MessageContainer(author.getName(),message));
         }
-
 
         if(isGlobal)
             message = "!"+message;

@@ -11,8 +11,16 @@ locale:
       badwords:
         add: "&c<0> &7added"
         remove: "&c<0> &7removed"
+    pm:
+      noreply: "&7Text someone"
+      messagesent: "&7Message was sent to &c<0>"
+      messagesent_title: "&7New message!"
+      newmessage: "&7New Message from &c<0>&7!"
+      player_not_found: "&7Player <0> not found"
+      wrong_usage_pm: "&7Wrong usage, use /pm <0> <text>"
 
 chat:
+  use_makoto_private_messages: true
   useCustomName: true
   hasGlobalChat: true
   system_msg:

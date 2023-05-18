@@ -7,6 +7,7 @@ import ru.makotomc.makotochat.commands.PluginCommand;
 import ru.makotomc.makotochat.handlers.ChatHandler;
 import ru.makotomc.makotochat.handlers.DeathHandler;
 import ru.makotomc.makotochat.handlers.JoinExitHandler;
+import ru.makotomc.makotochat.handlers.PMessageHandler;
 
 import java.util.Objects;
 
@@ -23,8 +24,10 @@ public final class MakotoChat extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ChatHandler(),this);
         Bukkit.getPluginManager().registerEvents(new JoinExitHandler(), this);
         Bukkit.getPluginManager().registerEvents(new DeathHandler(), this);
+        Bukkit.getPluginManager().registerEvents(new PMessageHandler(),this);
 
         //commands
+        Objects.requireNonNull(Bukkit.getPluginCommand("makotomsg")).setExecutor(new PMessageHandler());
         Objects.requireNonNull(Bukkit.getPluginCommand("makotochat")).setExecutor(new PluginCommand());
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this,ChatHandler::checkMsgs,1000,1000);
